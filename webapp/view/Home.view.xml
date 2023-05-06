@@ -1,0 +1,32 @@
+<mvc:View controllerName="zfioritesting.controller.Home"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m">
+    <Page id="page" title="{i18n>title}">
+        <content>
+            <List id="list" items="{/Categories}" mode="SingleSelect">
+                <headerToolbar>
+                    <OverflowToolbar>
+                        <Title text="Tilte tootlbar" level="H2" />
+                        <ToolbarSpacer />
+                        <Button
+                            text="Create"
+                            icon="sap-icon://sys-add"
+                            press="onPressCreate" />
+                        <Button
+                            text="Update"
+                            icon="sap-icon://edit"
+                            press="onPressUpdate" />
+                        <Button
+                            text="Delete"
+                            icon="sap-icon://delete"
+                            type="Negative"
+                            press="onPressDelete" />
+                    </OverflowToolbar>
+                </headerToolbar>
+                <items>
+                    <StandardListItem title="{ID}" description="{Name}"></StandardListItem>
+                </items>
+            </List>
+        </content>
+    </Page>
+</mvc:View>
