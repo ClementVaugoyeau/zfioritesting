@@ -1,54 +1,67 @@
+# SAP Fiori application to implement testing tools
+
+[![SAPUI5][SAPUI5]][SAPUI5-url] &emsp; [![QUnit][QUnit]][QUnit-url] &emsp; [![OPA5][OPA5]][OPA5-url] 
+
 <!-- ABOUT -->
-# About the project
+## About the project
 
 **Introduction**
 
-The objective is to implement and execute various test methods on a Fiori SAPUI5 application.
-The application will rely on the free public OData service [Northwind](https://services.odata.org/) for data acquisition.
+This application aims to implement and run various test tools listed in the following section.
+The application will rely on the free public OData service [Northwind](https://services.odata.org/).
 
 
-<!-- BUILD -->
-## Built with
-[![SAPUI5][SAPUI5]][SAPUI5-url] SAPUI5 is a web framework based on JavaScript and HTML5 that is used to develop user interfaces for SAP applications.
+**Testing tools**
+- [QUnit](https://sapui5.hana.ondemand.com/sdk/#/topic/09d145cd86ee4f8e9d08715f1b364c51) a JavaScript unit testing framework
+- [OPA5](https://sapui5.hana.ondemand.com/sdk/#/topic/2696ab50faad458f9b4027ec2f9b884d) integration testing with one-page acceptance tests
+
+**Built with**
+
+- [SAPUI5](https://sapui5.hana.ondemand.com/) a web framework based on JavaScript and HTML5 that is used to develop user interfaces for SAP applications.
 
 
-## Application Details
-|               |
-| ------------- |
-|**Generation Date and Time**<br>Sat May 06 2023 11:07:31 GMT+0000 (Coordinated Universal Time)|
-|**App Generator**<br>@sap/generator-fiori-freestyle|
-|**App Generator Version**<br>1.9.5|
-|**Generation Platform**<br>SAP Business Application Studio|
-|**Template Used**<br>simple|
-|**Service Type**<br>SAP System (ABAP On Premise)|
-|**Service URL**<br>https://services.odata.org/V2/Northwind/Northwind.svc/
-|**Module Name**<br>zfioritesting|
-|**Application Title**<br>Testing |
-|**Namespace**<br>|
-|**UI5 Theme**<br>sap_horizon|
-|**UI5 Version**<br>1.113.0|
-|**Enable Code Assist Libraries**<br>False|
-|**Enable TypeScript**<br>False|
-|**Add Eslint configuration**<br>False|
+## Starting the app
 
-## Starting the generated app
+-   In order to launch the application, first run the following command to install the necessary dependencies from the application root folder:
 
--   In order to launch the generated app, simply run the following from the generated app root folder:
+```
+    npm install
+```
+
+-   Then simply run the following from the application root folder:
 
 ```
     npm start
 ```
 
-- It is also possible to run the application using mock data that reflects the OData Service URL supplied during application generation.  In order to run the application with Mock Data, run the following from the generated app root folder:
+## Running the tests
+
+The tests are launched from the root folder of the application.
+
+-   Run all tests:
 
 ```
-    npm run start-mock
+    npx fiori run --open test/testsuite.qunit.html
 ```
 
-#### Pre-requisites:
+-   Run ***QUnit*** tests:
 
-1. Active NodeJS LTS (Long Term Support) version and associated supported NPM version.  (See https://nodejs.org)
+```
+    npx fiori run --open test/unit/unitTests.qunit.html
+```
 
+-   Run ***OPA5*** tests:
+
+```
+    npx fiori run --open test/integration/opaTests.qunit.html
+```
+
+
+<!-- DEV -->
+## Developpement roadmap
+ 1. Generate the application and create the test pages 
+ 2. Connect the application with the OData Northwind service
+ 3. ...
 
 <!-- AUTHOR -->
 ## Author
@@ -62,3 +75,7 @@ Valentin Cadart - cadartv@gmail.com | valentin_cadart@ens.univ-artois.fr
 <!-- https://simpleicons.org/ -->
 [SAPUI5]: https://img.shields.io/badge/SAPUI5-0FAAFF?style=for-the-badge&logo=sap&logoColor=white   
 [SAPUI5-url]: https://sapui5.hana.ondemand.com/
+[QUnit]: https://img.shields.io/badge/QUnit-9C3493?style=for-the-badge
+[QUnit-url]: https://qunitjs.com/
+[OPA5]: https://img.shields.io/badge/OPA5-3b5b7c?style=for-the-badge
+[OPA5-url]: https://sapui5.hana.ondemand.com/sdk/#/topic/2696ab50faad458f9b4027ec2f9b884d
