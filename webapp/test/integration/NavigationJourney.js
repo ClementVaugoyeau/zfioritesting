@@ -13,9 +13,13 @@ sap.ui.define([
 		// Arrangements
 		Given.iStartMyApp();
 
+		// Actions
+		When.onTheViewPage.iWaitUntilProductListIsLoaded();
+
 		// Assertions
 		Then.onTheAppPage.iShouldSeeTheApp();
       	Then.onTheViewPage.iShouldSeeThePageView();
+		Then.onTheViewPage.iShouldSeeProductList();
 
 		//Cleanup
 		Then.iTeardownMyApp();

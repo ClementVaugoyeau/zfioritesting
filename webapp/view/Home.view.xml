@@ -3,28 +3,70 @@
     xmlns="sap.m">
     <Page id="page" title="{i18n>title}">
         <content>
-            <List id="list" items="{/Categories}" mode="SingleSelect">
+            <List   
+                id="HomeViewProductList" 
+                items="{
+                    path: '/Products',
+                    parameters: {
+                        expand: 'Category'
+                    },
+                    sorter: {
+                        path: 'Category/Name',
+                        descending: false,
+                        group: true
+                    },
+                    groupHeaderFactory: '.createGroupHeader'
+                }" >
                 <headerToolbar>
-                    <OverflowToolbar>
-                        <Title text="Tilte tootlbar" level="H2" />
-                        <ToolbarSpacer />
+                    <OverflowToolbar 
+                        id="HomeViewProductListOverflowToolbar">
+                        <Title 
+                            id="HomeViewProductListOverflowToolbarTitle"
+                            text="{i18n>toolbarTitle}" 
+                            level="H2" />
+                        <ToolbarSpacer 
+                            id="HomeViewProductListOverflowToolbarSpacer" />
                         <Button
+                            id="HomeViewProductListCreateButton"
                             text="Create"
+                            type="Emphasized"
                             icon="sap-icon://sys-add"
                             press="onPressCreate" />
                         <Button
-                            text="Update"
+                            id="HomeViewProductListEditButton"
+                            text="Edit"
+                            type="Emphasized"
                             icon="sap-icon://edit"
-                            press="onPressUpdate" />
+                            press="onPressEdit" />
                         <Button
+                            id="HomeViewProductListDeleteButton"
                             text="Delete"
-                            icon="sap-icon://delete"
                             type="Negative"
+                            icon="sap-icon://delete"
                             press="onPressDelete" />
                     </OverflowToolbar>
                 </headerToolbar>
-                <items>
-                    <StandardListItem title="{ID}" description="{Name}"></StandardListItem>
+                 <items>
+                    <ObjectListItem
+                        id="HomeViewProductListItems" 
+                        title="{Name}"
+                        number="{
+                            path: 'Price',
+                            formatOptions: {
+                                showMeasure: false
+                            }
+                        }"
+                        numberUnit="EUR" >
+                        <firstStatus>
+                            <ObjectStatus
+                                id="HomeViewProductListItemsStatus"
+                                text="Available"
+                                state="Success" />
+                        </firstStatus>
+                        <ObjectAttribute
+                            id="HomeViewProductListItemsAttr"
+                            text="{Description}" />
+                    </ObjectListItem>
                 </items>
             </List>
         </content>

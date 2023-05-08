@@ -1,4 +1,4 @@
-# SAP Fiori application to implement testing tools
+# SAPUI5 Fiori application to implement testing tools
 
 [![SAPUI5][SAPUI5]][SAPUI5-url] &emsp; [![QUnit][QUnit]][QUnit-url] &emsp; [![OPA5][OPA5]][OPA5-url] 
 
@@ -25,35 +25,36 @@ The application will rely on the free public OData service [Northwind](https://s
 -   In order to launch the application, first run the following command to install the necessary dependencies from the application root folder:
 
 ```
-    npm install
+npm install
 ```
 
--   Then simply run the following from the application root folder:
+-   Then simply run the following:
 
 ```
-    npm start
+npm start
 ```
 
-## Running the tests
+## Run tests
 
 The tests are launched from the root folder of the application.
+SAP Business Application Studio may prevent the paste shortcut *CTRL+V*, you can perform the paste using the shortcut *SHIFT+INSER*.
 
 -   Run all tests:
 
 ```
-    npx fiori run --open test/testsuite.qunit.html
+npx fiori run --open test/testsuite.qunit.html
 ```
 
--   Run ***QUnit*** tests:
+-   Run only ***QUnit*** tests:
 
 ```
-    npx fiori run --open test/unit/unitTests.qunit.html
+npx fiori run --open test/unit/unitTests.qunit.html
 ```
 
--   Run ***OPA5*** tests:
+-   Run only ***OPA5*** tests:
 
 ```
-    npx fiori run --open test/integration/opaTests.qunit.html
+npx fiori run --open test/integration/opaTests.qunit.html
 ```
 
 
@@ -61,7 +62,12 @@ The tests are launched from the root folder of the application.
 ## Developpement roadmap
  1. Generate the application and create the test pages 
  2. Connect the application with the OData Northwind service
- 3. ...
+ 3. Display of product data in home view
+ 4. Navigation to product detail view
+ 5. Implement the creation of a new product
+ 6. Implement the modification of a product
+ 7. Implement the deletion of a product
+
 
 <!-- AUTHOR -->
 ## Author
