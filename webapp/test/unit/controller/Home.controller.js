@@ -5,53 +5,47 @@ sap.ui.define([
     "sap/m/MessageToast",
     "sap/m/GroupHeaderListItem",
     "sap/ui/thirdparty/sinon",
+    "sap/ui/thirdparty/sinon-qunit"
 ], function (Controller, MessageToast, GroupHeaderListItem, sinon) {
     "use strict";
 
-    QUnit.module("Home Controller", {
-        beforeEach: function (assert) {
-            var done = assert.async();
-            var oComponent = {
-                getModel: function (modelName) {
-                    if (modelName === "i18n") {
-                        return {
-                            getResourceBundle: function () {
-                                return {
-                                    getText: function (key) {
-                                        if (key === "ODataLoadingSuccess") {
-                                            return "OData loading success message";
-                                        } else if (key === "ODataLoadingFailed") {
-                                            return "OData loading failed message";
-                                        }
-                                    },
-                                };
-                            },
-                        };
-                    }
-                },
-            };
-
+    QUnit.module("Contrôleur Home", {
+        beforeEach: function () {
             this.oController = new Controller();
             this.oController.getOwnerComponent = function () {
-                return oComponent;
+                return {
+                    getModel: function (modelName) {
+                        if (modelName === "i18n") {
+                            return {
+                                getResourceBundle: function () {
+                                    return {
+                                        getText: function (key) {
+                                            if (key === "ODataLoadingSuccess") {
+                                                return "Message de succès de chargement OData";
+                                            } else if (key === "ODataLoadingFailed") {
+                                                return "Message d'échec de chargement OData";
+                                            }
+                                        }
+                                    };
+                                }
+                            };
+                        }
+                    }
+                };
             };
             this.oController.getView = function () {
                 return {
-                    setModel: function () {},
+                    setModel: function () {}
                 };
             };
-
-            setTimeout(function () {
-                done();
-            }, 1000); // add some delay before calling done()
         },
 
         afterEach: function () {
             this.oController.destroy();
-        },
+        }
     });
 
-    QUnit.test("Initialization", function (assert) {
+    QUnit.test("Initialisation", function (assert) {
         var done = assert.async();
 
         // Arrange
@@ -60,42 +54,42 @@ sap.ui.define([
         // Act
         this.oController.onInit();
 
-        // Wait for the asynchronous operations to complete
+        // Attendre que les opérations asynchrones se terminent
         setTimeout(function () {
             // Assert
-            assert.strictEqual(messageToastStub.callCount, 1, "MessageToast.show method was called once");
-			assert.ok(messageToastStub.calledOnce, "MessageToast.show method was called once");
-			assert.strictEqual(messageToastStub.getCall(0).args[0], "OData loading success message", "Correct success message displayed");
-		  // Cleanup
+            assert.strictEqual(messageToastStub.callCount, 1, "La méthode MessageToast.show a été appelée une fois");
+            assert.ok(messageToastStub.calledOnce, "La méthode MessageToast.show a été appelée une fois");
+            assert.strictEqual(messageToastStub.getCall(0).args[0], "Message de succès de chargement OData", "Message de succès affiché correctement");
+            // Nettoyage
             messageToastStub.restore();
             done();
-        }, 2000); // add some delay before calling done()
+        }, 2000); // ajouter un délai avant d'appeler done()
     });
 
-	QUnit.test("Group Header Generation", function(assert) {
-		// Arrange
-		var oGroup = {
-			key: "Group 1"
-		};
+    QUnit.test("Génération d'en-tête de groupe", function (assert) {
+        // Arrange
+        var oGroup = {
+            key: "Groupe 1"
+        };
 
-		// Act
-		var oGroupHeader = this.oController.getGroupHeader(oGroup);
+        // Act
+        var oGroupHeader = this.oController.getGroupHeader(oGroup);
 
-		// Assert
-		assert.ok(oGroupHeader instanceof GroupHeaderListItem, "GroupHeaderListItem instance created");
-		assert.strictEqual(oGroupHeader.getTitle(), "Group 1", "Group header title set correctly");
-		assert.strictEqual(oGroupHeader.getUpperCase(), false, "Group header upperCase property set correctly");
-	});
+        // Assert
+        assert.ok(oGroupHeader instanceof GroupHeaderListItem, "Instance de GroupHeaderListItem créée");
+        assert.strictEqual(oGroupHeader.getTitle(), "Groupe 1", "Titre de l'en-tête de groupe défini correctement");
+        assert.strictEqual(oGroupHeader.getUpperCase(), false, "Propriété upperCase de l'en-tête de groupe définie correctement");
+    });
 
-	QUnit.test("Button Press", function(assert) {
-		// Arrange
-		var consoleLogStub = sinon.stub(console, "log");
+    QUnit.test("Appui sur le bouton", function (assert) {
+        // Arrange
+        var consoleLogStub = sinon.stub(console, "log");
 
-		// Act
-		this.oController.onPressCreate();
+        // Act
+        this.oController.onPressCreate();
 
-		// Assert
-		assert.ok(consoleLogStub.calledOnce, "console.log method was called once");
-		assert.strictEqual(consoleLogStub.getCall(0).args[0], "Pressed!", "Correct log message displayed");
-	});
+        // Assert
+        assert.ok(consoleLogStub.calledOnce, "La méthode console.log a été appelée une fois");
+        assert.strictEqual(consoleLogStub.getCall(0).args[0], "Pressed!", "Message de log affiché correctement");
+    });
 });
