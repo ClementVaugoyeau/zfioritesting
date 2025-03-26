@@ -38,18 +38,8 @@ sap.ui.define([
             console.log("Pressed!");
         },
 
-        onPressModify: function (sItemId, oUpdatedData) {
-            var oModel = this.getView().getModel();
-            var sPath = "/Products('" + sItemId + "')";
-
-            oModel.update(sPath, oUpdatedData, {
-                success: function () {
-                    MessageToast.show("Item successfully updated!");
-                },
-                error: function () {
-                    MessageToast.show("Failed to update the item.");
-                }
-            });
+        onPressEdit: function (sItemId, oUpdatedData) {
+            console.log("Modified !");
         }
     });
 });
